@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Code Canvas</string>
+    <string name="title_activity_main">Code Canvas</string>
+    <string name="package_name">com.codecanvas.app</string>
+    <string name="custom_url_scheme">com.codecanvas.app</string>
+    <string name="server_client_id">14287125872-2nh2tmka0kbkb8mj0lftvrp5c43meqia.apps.googleusercontent.com</string>
+</resources>
