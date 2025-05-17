@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Copy, Cut, Paste } from 'lucide-react';
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Copy, Nut as Cut, Cast as Paste } from 'lucide-react';
 
 interface TouchCursorProps {
   editor: any;
