@@ -40,8 +40,12 @@ const SignIn: React.FC<SignInProps> = ({ onToggleMode }) => {
 
     try {
       await signIn(email, password);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Authentication failed');
+    } catch (err: any) {
+      if (err?.message === 'Invalid login credentials') {
+        setError('Invalid email or password. Please check your credentials and try again.');
+      } else {
+        setError(err instanceof Error ? err.message : 'An error occurred during sign in. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
