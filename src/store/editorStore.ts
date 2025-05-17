@@ -15,6 +15,7 @@ interface EditorState {
   autoClosingBrackets: boolean;
   formatOnPaste: boolean;
   formatOnType: boolean;
+  theme: string | null;
   gitConfig: GitConfig;
 
   // Editor state
@@ -36,6 +37,7 @@ interface EditorState {
   updateGitConfig: (config: Partial<GitConfig>) => void;
   setPosition: (position: EditorPosition) => void;
   setSelection: (selection: EditorSelection | null) => void;
+  setTheme: (theme: string) => void;
 }
 
 export const useEditorStore = create<EditorState>()(
@@ -53,6 +55,7 @@ export const useEditorStore = create<EditorState>()(
       autoClosingBrackets: true,
       formatOnPaste: true,
       formatOnType: true,
+      theme: null, // Will default to system theme
       gitConfig: {
         name: '',
         email: ''
@@ -79,6 +82,7 @@ export const useEditorStore = create<EditorState>()(
       })),
       setPosition: (position) => set({ position }),
       setSelection: (selection) => set({ selection }),
+      setTheme: (theme) => set({ theme }),
     }),
     {
       name: 'editor-storage',
@@ -95,6 +99,7 @@ export const useEditorStore = create<EditorState>()(
         formatOnPaste: state.formatOnPaste,
         formatOnType: state.formatOnType,
         gitConfig: state.gitConfig,
+        theme: state.theme,
       }),
     }
   )
