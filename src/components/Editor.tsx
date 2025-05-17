@@ -60,6 +60,7 @@ const Editor: React.FC<EditorProps> = ({ isDark }) => {
 
   const handleEditorDidMount = (editorInstance: any) => {
     setEditor(editorInstance);
+    editorRef.current = editorInstance;
 
     editorInstance.updateOptions({
       fontSize,
@@ -115,8 +116,6 @@ const Editor: React.FC<EditorProps> = ({ isDark }) => {
       }
     });
   };
-
-  editorRef.current = editorInstance;
 
   const onInsertSnippet = (code: string) => {
     if (editor) {
@@ -195,10 +194,7 @@ const Editor: React.FC<EditorProps> = ({ isDark }) => {
         contextMenu.appendChild(goToDefinitionItem);
         contextMenu.appendChild(findUsagesItem);
 
-        
-
         document.body.appendChild(contextMenu);
-
       };
 
       editor.onMouseDown(handleContextMenu);
