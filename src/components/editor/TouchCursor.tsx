@@ -45,8 +45,7 @@ const TouchCursor: React.FC<TouchCursorProps> = ({ editor }) => {
     const textBefore = model.getValueInRange({ startLineNumber: currentPosition.lineNumber, startColumn: Math.max(1, currentPosition.column - 5), endLineNumber: currentPosition.lineNumber, endColumn: currentPosition.column });
     const textAfter = model.getValueInRange({ startLineNumber: currentPosition.lineNumber, startColumn: currentPosition.column, endLineNumber: currentPosition.lineNumber, endColumn: currentPosition.column + 5 });
     setMagnifiedText(textBefore + '|' + textAfter); // Use '|' to represent the cursor position
-    };
-  }, []);
+  };
 
   const moveCursor = (direction: 'up' | 'down' | 'left' | 'right') => {
     const position = editor.getPosition();
