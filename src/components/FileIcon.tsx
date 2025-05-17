@@ -8,7 +8,7 @@ import {
 import {
   SiTypescript, SiBabel, SiEslint, SiWebpack, SiVite, SiPrettier, SiJson,
   SiStyledcomponents, SiYaml, SiGo, SiRust, SiDotnet, SiSwift, SiKotlin, 
-  SiC, SiCplusplus, SiCsharp, SiDart, SiElixir, SiGraphql, SiHaskell,
+  SiC, SiCplusplus, SiGraphql, SiHaskell,
   SiLua, SiPerl, SiPostgresql, SiRuby, SiScala
 } from 'react-icons/si';
 import { GoGear } from 'react-icons/go';
@@ -144,8 +144,8 @@ const FileIcon: React.FC<FileIconProps> = ({
           case 'swift': IconComponent = SiSwift; break;
           case 'c': IconComponent = SiC; break;
           case 'cpp': case 'cc': case 'cxx': case 'h': case 'hpp': IconComponent = SiCplusplus; break;
-          case 'cs': IconComponent = SiCsharp; break;
-          case 'dart': IconComponent = SiDart; break;
+          case 'cs': IconComponent = SiDotnet; break; // Changed from SiCsharp to SiDotnet
+          case 'dart': IconComponent = FaCode; break; // Changed to generic code icon
           case 'ex': case 'exs': IconComponent = SiElixir; break;
           case 'go': IconComponent = SiGo; break;
           case 'graphql': case 'gql': IconComponent = SiGraphql; break;
