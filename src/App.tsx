@@ -119,7 +119,7 @@ function App() {
         >
           <Menu size={24} className="text-gray-300" />
         </button>
-        <h1 className="ml-4 text-lg font-semibold text-white truncate">Code Canvas</h1>
+        <h1 className="ml-4 text-lg font-semibold font-heading text-white truncate">Code Canvas</h1>
         <div className="ml-auto flex items-center space-x-2 flex-shrink-0">
           {user && (
             <div className="flex items-center mr-4 space-x-3">

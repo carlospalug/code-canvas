@@ -16,7 +16,7 @@ const Login: React.FC = () => {
               <Bot size={32} className="text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">
+          <h1 className="text-3xl font-bold font-heading text-white mb-2">
             Code Canvas
           </h1>
           <p className="text-blue-100">

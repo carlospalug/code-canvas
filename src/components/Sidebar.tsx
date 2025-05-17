@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
     <div className="h-full w-full flex flex-col">
       {/* Header */}
       <div className="p-6 bg-gradient-to-br from-gray-800 to-gray-900">
-        <h1 className="text-2xl font-semibold text-white">Code Canvas</h1>
+        <h1 className="text-2xl font-bold font-heading text-white">Code Canvas</h1>
         <p className="text-sm text-gray-400 mt-1">Mobile Code Editor</p>
       </div>
 
@@ -70,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
               bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
           >
             <FilePlus size={18} />
-            <span className="text-sm">New File</span>
+            <span className="text-sm font-medium">New File</span>
           </button>
           <button
             onClick={() => handleCreate('folder')}
@@ -78,7 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
               bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
           >
             <FolderPlus size={18} />
-            <span className="text-sm">New Folder</span>
+            <span className="text-sm font-medium">New Folder</span>
           </button>
         </div>
       </div>
