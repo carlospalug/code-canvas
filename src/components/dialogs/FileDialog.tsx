@@ -50,8 +50,8 @@ const FileDialog: React.FC<FileDialogProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-md overflow-hidden scale-in-center">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-md overflow-hidden bounce-in">
         <div className="flex items-center justify-between p-5 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center space-x-3">
             {type === 'create-file' || (type === 'modify' && itemType === 'file') ? (
@@ -77,7 +77,7 @@ const FileDialog: React.FC<FileDialogProps> = ({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-5">
+        <form onSubmit={handleSubmit} className="p-5 slide-in-up">
           {type !== 'delete' && type !== 'modify' && (
             <div className="mb-5">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -89,7 +89,8 @@ const FileDialog: React.FC<FileDialogProps> = ({
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg 
                   bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100
-                  focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm
+                  transition-all duration-200 ease-in-out"
                 autoFocus
                 placeholder={`Enter ${itemType} name...`}
               />
@@ -106,14 +107,15 @@ const FileDialog: React.FC<FileDialogProps> = ({
                 onChange={(e) => onContentChange?.(e.target.value)}
                 className="w-full h-64 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg 
                   bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-sm
-                  focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm
+                  transition-all duration-200"
                 spellCheck={false}
               />
             </div>
           )}
 
           {type === 'delete' && (
-            <div className="mb-5">
+            <div className="mb-5 animate-pulse-slow">
               <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border-l-4 border-red-500">
                 <p className="text-red-800 dark:text-red-300">
                   Are you sure you want to delete this {itemType}? This action cannot be undone.
@@ -133,10 +135,10 @@ const FileDialog: React.FC<FileDialogProps> = ({
             </button>
             <button
               type="submit"
-              className={`px-4 py-2.5 rounded-lg text-white transition-colors font-medium flex items-center space-x-2
+              className={`px-4 py-2.5 rounded-lg text-white transition-all duration-300 font-medium flex items-center space-x-2
                 ${type === 'delete'
-                  ? 'bg-red-600 hover:bg-red-700 active:bg-red-800'
-                  : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'} shadow-sm`}
+                  ? 'bg-red-600 hover:bg-red-700 active:bg-red-800 hover:scale-105 active:scale-95'
+                  : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 hover:scale-105 active:scale-95'} shadow-sm`}
             >
               {type === 'modify' && (
                 <>

@@ -32,6 +32,7 @@ function App() {
   const { isAuthenticated, user, signOut } = useAuthStore();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [aiAssistantOpen, setAiAssistantOpen] = useState(false);
+  const [pageTransition, setPageTransition] = useState('fade-in');
 
   useEffect(() => {
     document.body.className = isDark ? 'dark' : 'light';
@@ -64,6 +65,14 @@ function App() {
     }
   }, []);
 
+  // Add page transition effect when view changes
+  useEffect(() => {
+    setPageTransition('');
+    setTimeout(() => {
+      setPageTransition('fade-in');
+    }, 10);
+  }, [currentView]);
+
   if (!isAuthenticated) {
     return <Login />;
   }
@@ -71,7 +80,7 @@ function App() {
   const renderContent = () => {
     if (!currentView) {
       return (
-        <div className="flex-1 flex flex-col bg-white dark:bg-gray-900 overflow-hidden">
+        <div className={`flex-1 flex flex-col bg-white dark:bg-gray-900 overflow-hidden ${pageTransition}`}>
           {tabs.length > 0 && (
             <TabBar 
               files={tabs}
@@ -88,24 +97,32 @@ function App() {
       );
     }
 
-    switch (currentView) {
-      case 'storage':
-        return <Storage />;
-      case 'bookmarks':
-        return <Bookmarks />;
-      case 'recent':
-        return <RecentFiles />;
-      case 'samples':
-        return <CodeSamples />;
-      case 'manager':
-        return <StorageManager />;
-      case 'settings':
-        return <Settings />;
-      case 'help':
-        return <Help />;
-      default:
-        return null;
-    }
+    const Component = (() => {
+      switch (currentView) {
+        case 'storage':
+          return Storage;
+        case 'bookmarks':
+          return Bookmarks;
+        case 'recent':
+          return RecentFiles;
+        case 'samples':
+          return CodeSamples;
+        case 'manager':
+          return StorageManager;
+        case 'settings':
+          return Settings;
+        case 'help':
+          return Help;
+        default:
+          return () => null;
+      }
+    })();
+
+    return (
+      <div className={`flex-1 overflow-hidden ${pageTransition}`}>
+        <Component />
+      </div>
+    );
   };
 
   return (
@@ -114,7 +131,8 @@ function App() {
       <div className="h-16 flex items-center px-4 bg-gradient-to-r from-gray-800 to-gray-900 text-white border-b border-gray-700 min-w-0 shadow-md">
         <button 
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-colors flex-shrink-0"
+          className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-colors flex-shrink-0
+            hover:scale-110 active:scale-95 transition-transform"
           aria-label="Toggle Sidebar"
         >
           <Menu size={24} className="text-gray-100" />
@@ -137,14 +155,14 @@ function App() {
           )}
           <button
             onClick={() => setAiAssistantOpen(true)}
-            className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-colors"
+            className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-all hover:scale-110 active:scale-95"
             aria-label="AI Assistant"
           >
             <Bot size={24} className="text-gray-100" />
           </button>
           <button
             onClick={toggleTheme}
-            className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-colors"
+            className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-all hover:scale-110 active:scale-95"
             aria-label="Toggle Theme"
           >
             {isDark ? <Sun size={24} className="text-gray-100" /> : <Moon size={24} className="text-gray-100" />}
@@ -164,7 +182,7 @@ function App() {
         {/* Sidebar overlay */}
         {sidebarOpen && (
           <div 
-            className="fixed inset-0 bg-black/30 z-40 lg:hidden"
+            className="fixed inset-0 bg-black/30 z-40 lg:hidden animate-fade-in"
             onClick={() => setSidebarOpen(false)}
           />
         )}

@@ -111,8 +111,8 @@ const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm fade-in">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl scale-in-center">
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center space-x-2">
             <Bot className="text-blue-500" size={24} />
@@ -122,13 +122,13 @@ const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-all hover:scale-110 active:scale-95"
           >
             <X size={20} className="text-gray-500 dark:text-gray-400" />
           </button>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 slide-in-up">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -140,13 +140,14 @@ const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onClose }) => {
                 placeholder="Describe what you want to create (e.g., 'Create a React component for a todo list with TypeScript')"
                 className="w-full h-32 px-4 py-2 text-gray-900 dark:text-gray-100 
                   bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 
-                  dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500
+                  transition-all"
               />
             </div>
 
             {error && (
               <div className="p-4 bg-red-50 dark:bg-red-900/20 border-l-4 
-                border-red-500 rounded">
+                border-red-500 rounded animate-pulse-slow">
                 <p className="text-sm text-red-700 dark:text-red-400">{error}</p>
               </div>
             )}
@@ -155,18 +156,18 @@ const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onClose }) => {
               type="submit"
               disabled={loading || !prompt.trim()}
               className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg 
-                hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed
-                flex items-center justify-center gap-2"
+                hover:bg-blue-700 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+                transition-all duration-300 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
                   <Loader className="animate-spin" size={18} />
-                  Generating and Creating Files...
+                  <span className="slide-in-right">Generating and Creating Files...</span>
                 </>
               ) : (
                 <>
                   <Bot size={18} />
-                  Generate and Create Files
+                  <span>Generate and Create Files</span>
                 </>
               )}
             </button>

@@ -34,7 +34,7 @@ const Storage: React.FC = () => {
   return (
     <div className="h-screen bg-white dark:bg-gray-900 flex flex-col">
       {/* Header with search and actions */}
-      <div className="p-3 flex gap-3 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-3 flex gap-3 border-b border-gray-200 dark:border-gray-700 slide-in-down">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
           <input
@@ -44,13 +44,15 @@ const Storage: React.FC = () => {
             placeholder="Search files..."
             className="w-full pl-9 pr-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 
               border border-gray-200 dark:border-gray-700 rounded-lg
-              text-gray-900 dark:text-gray-100 placeholder-gray-500"
+              text-gray-900 dark:text-gray-100 placeholder-gray-500
+              transition-all focus:ring-2 focus:ring-blue-500 hover:bg-gray-50 dark:hover:bg-gray-750"
           />
         </div>
         
         <button 
           onClick={() => openDialog('create-file')}
-          className="flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg 
+            hover:bg-blue-700 transition-all hover:scale-105 active:scale-95"
         >
           <FilePlus size={16} />
           <span className="hidden sm:inline">New File</span>
@@ -58,14 +60,15 @@ const Storage: React.FC = () => {
         
         <button 
           onClick={() => openDialog('create-folder')}
-          className="flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg 
+            hover:bg-blue-700 transition-all hover:scale-105 active:scale-95"
         >
           <FolderPlus size={16} />
           <span className="hidden sm:inline">New Folder</span>
         </button>
       </div>
       
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden fade-in">
         <FileExplorer />
       </div>
       
