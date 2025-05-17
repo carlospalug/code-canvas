@@ -7,6 +7,7 @@ interface TouchCursorProps {
 
 const TouchCursor: React.FC<TouchCursorProps> = ({ editor }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [magnifiedText, setMagnifiedText] = useState('');
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const TouchCursor: React.FC<TouchCursorProps> = ({ editor }) => {
           y: e.touches[0].clientY - rect.top
         });
         setIsVisible(true);
+        updateMagnifiedText();
       }
     };
 
@@ -31,6 +33,18 @@ const TouchCursor: React.FC<TouchCursorProps> = ({ editor }) => {
     return () => {
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [editor]); // Add editor to dependencies
+
+  const updateMagnifiedText = () => {
+    if (!editor) return;
+    const currentPosition = editor.getPosition();
+    const model = editor.getModel();
+    if (!model || !currentPosition) return;
+
+    const textBefore = model.getValueInRange({ startLineNumber: currentPosition.lineNumber, startColumn: Math.max(1, currentPosition.column - 5), endLineNumber: currentPosition.lineNumber, endColumn: currentPosition.column });
+    const textAfter = model.getValueInRange({ startLineNumber: currentPosition.lineNumber, startColumn: currentPosition.column, endLineNumber: currentPosition.lineNumber, endColumn: currentPosition.column + 5 });
+    setMagnifiedText(textBefore + '|' + textAfter); // Use '|' to represent the cursor position
     };
   }, []);
 
@@ -53,8 +67,10 @@ const TouchCursor: React.FC<TouchCursorProps> = ({ editor }) => {
         break;
     }
 
-    editor.setPosition(newPosition);
+    editor.setPosition(newPosition); // Update editor position first
+    updateMagnifiedText(); // Then update magnified text based on new position
     editor.focus();
+    
   };
 
   if (!isVisible) return null;

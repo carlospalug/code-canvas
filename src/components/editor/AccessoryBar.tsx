@@ -11,21 +11,41 @@ const AccessoryBar: React.FC<AccessoryBarProps> = ({ editor, language }) => {
   const [showSnippets, setShowSnippets] = useState(false);
   
   const symbols = [
+    // Brackets and Parentheses
     { label: '{', value: '{' },
     { label: '}', value: '}' },
     { label: '(', value: '(' },
     { label: ')', value: ')' },
     { label: '[', value: '[' },
     { label: ']', value: ']' },
+    // Operators and Comparisons
+    { label: '=', value: '=' },
+    { label: '+', value: '+' },
+    { label: '-', value: '-' },
+    { label: '*', value: '*' },
+    { label: '/', value: '/' },
+    { label: '%', value: '%' },
     { label: '<', value: '<' },
     { label: '>', value: '>' },
-    { label: ';', value: ';' },
-    { label: '=', value: '=' },
     { label: '!', value: '!' },
+    // Punctuation and Delimiters
+    { label: ';', value: ';' },
+    { label: ':', value: ':' },
+    { label: ',', value: ',' },
+    { label: '.', value: '.' },
+    { label: '\'', value: '\'' },
+    { label: '"', value: '"' },
+    // Other Common Symbols
     { label: '→', value: '=>' },
     { label: '`', value: '`' },
     { label: '${}', value: '${|}' },
-  ];
+    { label: '&', value: '&' },
+    { label: '|', value: '|' },
+    { label: '^', value: '^' },
+    { label: '~', value: '~' },
+    { label: '$', value: '$' },
+    { label: '_', value: '_' },
+ ];
 
   const insertSymbol = (value: string) => {
     const selection = editor.getSelection();
