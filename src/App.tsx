@@ -111,13 +111,13 @@ function App() {
   return (
     <div className="app-container h-screen w-screen flex flex-col overflow-hidden">
       {/* Top Bar */}
-      <div className="h-16 flex items-center px-4 bg-gray-800 text-white border-b border-gray-700 min-w-0">
+      <div className="h-16 flex items-center px-4 bg-gradient-to-r from-gray-800 to-gray-900 text-white border-b border-gray-700 min-w-0 shadow-md">
         <button 
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-3 hover:bg-gray-700 rounded-full transition-colors flex-shrink-0"
+          className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-colors flex-shrink-0"
           aria-label="Toggle Sidebar"
         >
-          <Menu size={24} className="text-gray-300" />
+          <Menu size={24} className="text-gray-100" />
         </button>
         <h1 className="ml-4 text-lg font-semibold font-heading text-white truncate">Code Canvas</h1>
         <div className="ml-auto flex items-center space-x-2 flex-shrink-0">
@@ -127,37 +127,47 @@ function App() {
                 <img 
                   src={user.picture} 
                   alt={user.name}
-                  className="w-8 h-8 rounded-full"
+                  className="w-8 h-8 rounded-full ring-2 ring-blue-500/20 shadow-sm"
                 />
               )}
-              <span className="text-sm text-gray-300 truncate max-w-[120px]">{user.name}</span>
+              <span className="text-sm text-gray-200 truncate max-w-[120px] font-medium">
+                {user.name}
+              </span>
             </div>
           )}
           <button
             onClick={() => setAiAssistantOpen(true)}
-            className="p-3 hover:bg-gray-700 rounded-full transition-colors"
+            className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-colors"
             aria-label="AI Assistant"
           >
-            <Bot size={24} className="text-gray-300" />
+            <Bot size={24} className="text-gray-100" />
           </button>
           <button
             onClick={toggleTheme}
-            className="p-3 hover:bg-gray-700 rounded-full transition-colors"
+            className="p-3 hover:bg-gray-700/50 active:bg-gray-700 rounded-full transition-colors"
             aria-label="Toggle Theme"
           >
-            {isDark ? <Sun size={24} className="text-gray-300" /> : <Moon size={24} className="text-gray-300" />}
+            {isDark ? <Sun size={24} className="text-gray-100" /> : <Moon size={24} className="text-gray-100" />}
           </button>
         </div>
       </div>
 
       <div className="main-layout flex-1 flex relative overflow-hidden">
-        {/* Sidebar */}
+        {/* Sidebar with improved transition */}
         <div 
-          className={`fixed z-50 h-[calc(100%-4rem)] ${sidebarOpen ? 'left-0' : '-left-full'} 
-            transition-all duration-300 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700`}
+          className={`fixed z-50 h-[calc(100%-4rem)] ${sidebarOpen ? 'left-0 shadow-xl' : '-left-full'} 
+            transition-all duration-300 ease-in-out w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700`}
         >
           <Sidebar onClose={() => setSidebarOpen(false)} />
         </div>
+
+        {/* Sidebar overlay */}
+        {sidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/30 z-40 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
 
         {/* Main Content Area */}
         <div className="flex-1 overflow-hidden">

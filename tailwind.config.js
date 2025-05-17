@@ -47,6 +47,15 @@ export default {
           },
         },
       },
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      backgroundImage: {
+        'gradient-sidebar': 'linear-gradient(135deg, var(--tw-gradient-stops))',
+      },
+      boxShadow: {
+        'inner-top': 'inset 0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+      },
     },
   },
   plugins: [],

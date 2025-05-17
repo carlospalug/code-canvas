@@ -55,10 +55,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
 
   return (
     <div className="h-full w-full flex flex-col">
-      {/* Header */}
-      <div className="p-6 bg-gradient-to-br from-gray-800 to-gray-900">
+      {/* Header with enhanced gradient */}
+      <div className="p-6 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600">
         <h1 className="text-2xl font-bold font-heading text-white">Code Canvas</h1>
-        <p className="text-sm text-gray-400 mt-1">Mobile Code Editor</p>
+        <p className="text-sm font-medium text-blue-100 mt-1">Mobile Code Editor</p>
       </div>
 
       {/* Quick Actions */}
@@ -66,16 +66,16 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
         <div className="flex space-x-2">
           <button
             onClick={() => handleCreate('file')}
-            className="flex-1 flex items-center justify-center space-x-2 px-3 py-2 
-              bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="flex-1 flex items-center justify-center space-x-2 px-3 py-2.5 
+              bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg transition-colors shadow-sm"
           >
             <FilePlus size={18} />
             <span className="text-sm font-medium">New File</span>
           </button>
           <button
             onClick={() => handleCreate('folder')}
-            className="flex-1 flex items-center justify-center space-x-2 px-3 py-2 
-              bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="flex-1 flex items-center justify-center space-x-2 px-3 py-2.5 
+              bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg transition-colors shadow-sm"
           >
             <FolderPlus size={18} />
             <span className="text-sm font-medium">New Folder</span>
@@ -90,20 +90,26 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
             <button
               onClick={() => handleNavigation(item.view)}
               className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg
-                transition-colors mb-1
+                transition-all duration-200 mb-1
                 ${currentView === item.view
-                  ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium shadow-sm'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
             >
               <item.icon 
                 size={20} 
-                className={currentView === item.view
+                className={`${currentView === item.view
                   ? 'text-blue-600 dark:text-blue-400'
                   : 'text-gray-500 dark:text-gray-400'
-                } 
+                } transition-colors`} 
+                strokeWidth={currentView === item.view ? 2.5 : 2}
               />
               <span className="text-sm font-medium">{item.label}</span>
+              
+              {/* Active indicator */}
+              {currentView === item.view && (
+                <span className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              )}
             </button>
             {item.divider && (
               <div className="my-3 border-t border-gray-200 dark:border-gray-700" />
