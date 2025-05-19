@@ -203,49 +203,4 @@ function App() {
   );
 }
 
-const styles = `
-<CODE_BLOCK>
-.app-container {
-  @apply h-screen w-screen flex flex-col overflow-hidden;
-}
-
-.main-layout {
-  @apply flex-1 flex relative overflow-hidden;
-}
-
-/* Default styles for larger screens */
-.main-layout {
-  display: flex;
-  flex-direction: row;
-}
-
-/* Tablet screens (less than 768px) */
-@media (max-width: 768px) {
-  .main-layout {
-    flex-direction: column; /* Stack sidebar and content vertically */
-  }
-
-  .main-layout .sidebar-container {
-    position: fixed;
-    top: 4rem;
-    left: 0;
-    width: 100%;
-    height: auto;
-    z-index: 60;
-  }
-
-  .main-layout .sidebar-container.closed {
-    left: -100%; /* Hide off-screen when closed */
-  }
-}
-
-/* Mobile phone screens (less than 480px) */
-@media (max-width: 480px) {
-  .main-layout {
-    flex-direction: column; /* Still stacked vertically */
-  }
-}
-</CODE_BLOCK>
-`;
-
 export default App;
