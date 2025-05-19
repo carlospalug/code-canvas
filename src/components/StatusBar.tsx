@@ -30,7 +30,8 @@ const StatusBar: React.FC<StatusBarProps> = ({ isDark }) => {
 
   useEffect(() => {
     const getBatteryInfo = async () => {
-      if (Capacitor.isPluginAvailable('Device')) {
+      // Check if we're on a native platform (not web)
+      if (Capacitor.getPlatform() !== 'web' && Capacitor.isPluginAvailable('Device')) {
         try {
           const info = await Device.getBatteryInfo();
           setBatteryInfo({ 
@@ -40,6 +41,9 @@ const StatusBar: React.FC<StatusBarProps> = ({ isDark }) => {
         } catch (error) {
           console.error('Error fetching battery info:', error);
         }
+      } else {
+        // In web browser, use default values
+        setBatteryInfo({ level: 100, isCharging: false });
       }
     };
 
