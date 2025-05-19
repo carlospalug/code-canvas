@@ -5,6 +5,12 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
+    esbuildOptions: {
+      // Exclude problematic files
+      exclude: [
+        'node_modules/monaco-editor/esm/vs/basic-languages/mysql/mysql.js'
+      ]
+    }
   },
   define: {
     global: 'globalThis',
@@ -34,7 +40,11 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
           monaco: ['@monaco-editor/react']
         }
-      }
+      },
+      // Exclude problematic files from the build
+      external: [
+        'node_modules/monaco-editor/esm/vs/basic-languages/mysql/mysql.js'
+      ]
     }
   },
   server: {
