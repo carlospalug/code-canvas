@@ -4,13 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    exclude: [
-      'lucide-react',
-      'node_modules/monaco-editor/esm/vs/basic-languages/mysql/mysql.js'
-    ],
-    esbuildOptions: {
-      // Other esbuild options can go here if needed
-    }
+    exclude: ['lucide-react'],
   },
   define: {
     global: 'globalThis',
@@ -40,8 +34,19 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
           monaco: ['@monaco-editor/react']
         }
-      }
-      // Removed the external configuration that was causing the syntax error
+      },
+      // Properly exclude the problematic file
+      onwarn(warning, warn) {
+        // Suppress specific warnings from monaco-editor
+        if (warning.code === 'CIRCULAR_DEPENDENCY' && warning.message.includes('monaco-editor')) {
+          return;
+        }
+        if (warning.message.includes('vs/basic-languages/mysql/mysql.js')) {
+          return;
+        }
+        warn(warning);
+      },
+      external: (id) => id.includes('vs/basic-languages/mysql/mysql.js')
     }
   },
   server: {
