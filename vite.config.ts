@@ -4,12 +4,12 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    exclude: [
+      'lucide-react',
+      'node_modules/monaco-editor/esm/vs/basic-languages/mysql/mysql.js'
+    ],
     esbuildOptions: {
-      // Exclude problematic files
-      exclude: [
-        'node_modules/monaco-editor/esm/vs/basic-languages/mysql/mysql.js'
-      ]
+      // Other esbuild options can go here if needed
     }
   },
   define: {
