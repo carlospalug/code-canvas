@@ -40,11 +40,8 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
           monaco: ['@monaco-editor/react']
         }
-      },
-      // Exclude problematic files from the build
-      external: [
-        'node_modules/monaco-editor/esm/vs/basic-languages/mysql/mysql.js'
-      ]
+      }
+      // Removed the external configuration that was causing the syntax error
     }
   },
   server: {
